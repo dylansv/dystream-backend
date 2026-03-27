@@ -1,7 +1,7 @@
 # app/routers/watch.py
 
 from fastapi import APIRouter
-from app.services.vimeus_client import VimeusClient
+from services.vimeus_client import VimeusClient
 
 router = APIRouter(prefix="/watch", tags=["watch"])
 

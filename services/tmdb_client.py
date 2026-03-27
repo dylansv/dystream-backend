@@ -2,7 +2,7 @@ from typing import Any, Dict, Optional
 
 import httpx
 
-from app.core.config import get_settings
+from core.config import get_settings
 
 
 class TMDbClient:

@@ -1,8 +1,8 @@
 import httpx
 from fastapi import APIRouter, HTTPException, Path, Query
 
-from app.schemas.movie import MovieDetailResponse, MovieListResponse
-from app.services.tmdb_client import TMDbClient
+from schemas.movie import MovieDetailResponse, MovieListResponse
+from services.tmdb_client import TMDbClient
 
 router = APIRouter(prefix="/movies", tags=["Movies"])
 
