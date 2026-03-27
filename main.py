@@ -36,9 +36,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# 📁 Archivos estáticos (solo si tienes carpeta frontend en repo)
-app.mount("/css", StaticFiles(directory="frontend/css"), name="css")
-app.mount("/js", StaticFiles(directory="frontend/js"), name="js")
 
 
 # 🌐 Frontend básico (opcional)
