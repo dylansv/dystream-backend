@@ -16,7 +16,8 @@ settings = get_settings()
 async def lifespan(app: FastAPI):
     yield
     await tmdb_client.close()
-    await vimeus_client.close()
+    # ⚠️ Quitamos vimeus_client porque no está definido
+    # await vimeus_client.close()
 
 
 app = FastAPI(
@@ -26,6 +27,7 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
+# 🔥 CORS abierto para que frontend (Vercel / local / app) funcione
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -34,10 +36,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# 📁 Archivos estáticos (solo si tienes carpeta frontend en repo)
 app.mount("/css", StaticFiles(directory="frontend/css"), name="css")
 app.mount("/js", StaticFiles(directory="frontend/js"), name="js")
 
 
+# 🌐 Frontend básico (opcional)
 @app.get("/")
 async def serve_index():
     return FileResponse("frontend/index.html")
@@ -48,6 +52,7 @@ async def serve_player():
     return FileResponse("frontend/player.html")
 
 
+# 🧪 Health check
 @app.get("/health", tags=["Health"])
 async def health():
     return {
@@ -57,6 +62,7 @@ async def health():
     }
 
 
+# 🧠 API root
 @app.get("/api", tags=["Health"])
 async def api_root():
     return {
@@ -65,5 +71,6 @@ async def api_root():
     }
 
 
+# 🎬 Rutas principales
 app.include_router(movies_router)
 app.include_router(watch_router)
